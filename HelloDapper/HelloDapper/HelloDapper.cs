@@ -274,4 +274,22 @@ values (@CompanyName, @Address)
             }
         }
     }
+
+    class UsingDynamicParameters
+    {
+        public void _tMain()
+        {
+            using (var conn = new SqlConnection("Data Source=LAPTOP-6Q7L361S\\MSSQLDEV;Initial Catalog=Northwind;User ID=sa;Password=Sa@123456"))
+            {
+                conn.Open();
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("@sid", 2, direction: System.Data.ParameterDirection.Input);
+                parameters.Add("@newn", "Muhammad Umar Farooq", direction: System.Data.ParameterDirection.Input);
+                string updateQuery = @"UPDATE SUPPLIERS set SUPPLIERS.ContactName = @newn where SUPPLIERS.SupplierID = @sid";
+                var effected = conn.Execute(updateQuery, parameters);
+                Console.Write($"Effected rows = {effected}");
+            }
+
+        }
+    }
 }

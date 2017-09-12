@@ -18,25 +18,12 @@ namespace HelloDapper
             using (var conn = new SqlConnection("Data Source=LAPTOP-6Q7L361S\\MSSQLDEV;Initial Catalog=Northwind;User ID=sa;Password=Sa@123456"))
             {
                 conn.Open();
-                var suppliersLookup = new Dictionary<int, Supplier>();
-                conn.Query<Supplier, Product, Supplier>(@"select Suppliers.*, Products.* from Products join Suppliers on Products.SupplierID = Suppliers.SupplierID and Suppliers.SupplierID IN @sid"
-, (supplier, Product)
- =>
- {
-     if (!suppliersLookup.ContainsKey(supplier.SupplierID))
-     {
-         suppliersLookup.Add(supplier.SupplierID, supplier);
-     }
-     var tempSupplier = suppliersLookup[supplier.SupplierID];
-     tempSupplier.Products = tempSupplier.Products ?? new List<Product>();
-     tempSupplier.Products.Add(Product);
-     return tempSupplier;
- }, new { sid = new[] { 1, 2, 4 } }, splitOn: "SupplierID");
-                foreach (var supplier in suppliersLookup.Values)
-                {
-                    Console.WriteLine(supplier.Products?.Count);
-                    ObjectDumper.Write(supplier);
-                }
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("@sid", 2,direction: System.Data.ParameterDirection.Input);
+                parameters.Add("@newn", "Muhammad Umar Farooq",direction: System.Data.ParameterDirection.Input);
+                string updateQuery = @"UPDATE SUPPLIERS set SUPPLIERS.ContactName = @newn where SUPPLIERS.SupplierID = @sid";
+                var effected = conn.Execute(updateQuery, parameters);
+                Console.Write($"Effected rows = {effected}");
             }
 
             //------------------Learn DB---------------------
