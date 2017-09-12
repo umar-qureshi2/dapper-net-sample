@@ -19,11 +19,16 @@ namespace HelloDapper
             {
                 conn.Open();
                 DynamicParameters parameters = new DynamicParameters();
-                parameters.Add("@sid", 2,direction: System.Data.ParameterDirection.Input);
-                parameters.Add("@newn", "Muhammad Umar Farooq",direction: System.Data.ParameterDirection.Input);
+                parameters.Add("@sid", 2, direction: System.Data.ParameterDirection.Input);
+                parameters.Add("@newn", "Muhammad Umar Farooq", direction: System.Data.ParameterDirection.Input);
                 string updateQuery = @"UPDATE SUPPLIERS set SUPPLIERS.ContactName = @newn where SUPPLIERS.SupplierID = @sid";
-                var effected = conn.Execute(updateQuery, parameters);
-                Console.Write($"Effected rows = {effected}");
+                var affected = conn.Execute(updateQuery,
+                    new[] {
+                        new {sid=3,newn="name 3" },
+                        new {sid=2,newn="name 2" },
+                        new {sid=1, newn="muhammad umar farooq qureshi" }
+                    });
+                Console.Write($"affected rows = {affected}");
             }
 
             //------------------Learn DB---------------------
