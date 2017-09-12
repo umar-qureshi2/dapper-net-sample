@@ -195,6 +195,34 @@ namespace HelloDapper
 
             }
         }
+        //complex and powerful
+        //multiple store products retrieval
+        public void DictionaryLookup()
+        {
+            using (var conn = new SqlConnection("Data Source=LAPTOP-6Q7L361S\\MSSQLDEV;Initial Catalog=Northwind;User ID=sa;Password=Sa@123456"))
+            {
+                conn.Open();
+                var suppliersLookup = new Dictionary<int, Supplier>();
+                conn.Query<Supplier, Product, Supplier>(@"select Suppliers.*, Products.* from Products join Suppliers on Products.SupplierID = Suppliers.SupplierID and Suppliers.SupplierID IN @sid"
+, (supplier, Product)
+ =>
+{
+    if (!suppliersLookup.ContainsKey(supplier.SupplierID))
+    {
+        suppliersLookup.Add(supplier.SupplierID, supplier);
+    }
+    var tempSupplier = suppliersLookup[supplier.SupplierID];
+    tempSupplier.Products = tempSupplier.Products ?? new List<Product>();
+    tempSupplier.Products.Add(Product);
+    return tempSupplier;
+}, new { sid = new[] { 1, 2, 4 } }, splitOn: "SupplierID");
+                foreach (var supplier in suppliersLookup.Values)
+                {
+                    Console.WriteLine(supplier.Products?.Count);
+                    ObjectDumper.Write(supplier);
+                }
+            }
+        }
     }
 
     class InsertUsingQuery
@@ -208,7 +236,7 @@ namespace HelloDapper
                     Address = "JLT",
                     CompanyName = "Trasix DMCC"
                 };
-                supplier.Id = sqlConnection.Query<int>(@"
+                supplier.SupplierID = sqlConnection.Query<int>(@"
 insert Suppliers(CompanyName, Address)
 values (@CompanyName, @Address)
 select cast (scope_identity() as int)
@@ -228,7 +256,7 @@ select cast (scope_identity() as int)
                     Address = "JLT",
                     CompanyName = "Trasix DMCC"
                 };
-                supplier.Id = sqlConnection.Execute(@"
+                supplier.SupplierID = sqlConnection.Execute(@"
 insert Suppliers(CompanyName, Address)
 values (@CompanyName, @Address)
 ", supplier);

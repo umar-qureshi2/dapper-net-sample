@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using Dapper;
 using System.Data.SqlClient;
 using System.Collections;
+using Dapper.Contrib.Extensions;
+using Dapper.Contrib;
 
 namespace HelloDapper
 {
@@ -13,9 +15,28 @@ namespace HelloDapper
     {
         static void Main(string[] args)
         {
-            using (var sqlConnection = new SqlConnection("Data Source=LAPTOP-6Q7L361S\\MSSQLDEV;Initial Catalog=Northwind;User ID=sa;Password=Sa@123456"))
+            using (var conn = new SqlConnection("Data Source=LAPTOP-6Q7L361S\\MSSQLDEV;Initial Catalog=Northwind;User ID=sa;Password=Sa@123456"))
             {
-                sqlConnection.Execute(@"Update Suppliers SET ContactName = @sname WHERE SupplierID = @sid", new { sname = "Umar", sid = "2" });
+                conn.Open();
+                var suppliersLookup = new Dictionary<int, Supplier>();
+                conn.Query<Supplier, Product, Supplier>(@"select Suppliers.*, Products.* from Products join Suppliers on Products.SupplierID = Suppliers.SupplierID and Suppliers.SupplierID IN @sid"
+, (supplier, Product)
+ =>
+ {
+     if (!suppliersLookup.ContainsKey(supplier.SupplierID))
+     {
+         suppliersLookup.Add(supplier.SupplierID, supplier);
+     }
+     var tempSupplier = suppliersLookup[supplier.SupplierID];
+     tempSupplier.Products = tempSupplier.Products ?? new List<Product>();
+     tempSupplier.Products.Add(Product);
+     return tempSupplier;
+ }, new { sid = new[] { 1, 2, 4 } }, splitOn: "SupplierID");
+                foreach (var supplier in suppliersLookup.Values)
+                {
+                    Console.WriteLine(supplier.Products?.Count);
+                    ObjectDumper.Write(supplier);
+                }
             }
 
             //------------------Learn DB---------------------
@@ -70,9 +91,11 @@ namespace HelloDapper
     }
 
     // Supplier
-    public class Supplier
+    [Table("Suppliers")]
+    public class Supplier : ISupplier
     {
-        public int Id { get; set; }
+        [Key]
+        public int SupplierID { get; set; }
         public string CompanyName { get; set; }
         public string ContactName { get; set; }
         public string ContactTitle { get; set; }
@@ -81,6 +104,7 @@ namespace HelloDapper
         public string PostalCode { get; set; }
         public string Country { get; set; }
 
+        [Write(false)]
         public List<Product> Products { get; set; }
     }
 }
