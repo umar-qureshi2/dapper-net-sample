@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace HelloDapper
 {
-    class IntroductionCode
+    class HelloDapper
     {
         static void _tMain(string[] args)
         {
@@ -232,6 +232,17 @@ select cast (scope_identity() as int)
 insert Suppliers(CompanyName, Address)
 values (@CompanyName, @Address)
 ", supplier);
+            }
+        }
+    }
+
+    class UpdateUsingExecute
+    {
+        public void _tMain()
+        {
+            using (var sqlConnection = new SqlConnection("Data Source=LAPTOP-6Q7L361S\\MSSQLDEV;Initial Catalog=Northwind;User ID=sa;Password=Sa@123456"))
+            {
+                sqlConnection.Execute(@"Update Suppliers SET ContactName = @sname WHERE SupplierID = @sid", new { sname = "Umar", sid = "2" });
             }
         }
     }
