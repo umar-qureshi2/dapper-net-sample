@@ -18,33 +18,10 @@ namespace HelloDapper
             using (var conn = new SqlConnection("Data Source=LAPTOP-6Q7L361S\\MSSQLDEV;Initial Catalog=Northwind;User ID=sa;Password=Sa@123456"))
             {
                 conn.Open();
-                DynamicParameters parameters = new DynamicParameters();
-                parameters.Add("@sid", 2, direction: System.Data.ParameterDirection.Input);
-                parameters.Add("@newn", "Muhammad Umar Farooq", direction: System.Data.ParameterDirection.Input);
-                string updateQuery = @"UPDATE SUPPLIERS set SUPPLIERS.ContactName = @newn where SUPPLIERS.SupplierID = @sid";
-                var affected = conn.Execute(updateQuery,
-                    new[] {
-                        new {sid=3,newn="name 3" },
-                        new {sid=2,newn="name 2" },
-                        new {sid=1, newn="muhammad umar farooq qureshi" }
-                    });
-                Console.Write($"affected rows = {affected}");
-            }
-
-            //------------------Learn DB---------------------
-            using (var sqlConnection = new SqlConnection("Data Source=LAPTOP-6Q7L361S\\MSSQLDEV;Initial Catalog=learn;User ID=sa;Password=Sa@123456"))
-            {
-                sqlConnection.Open();
-                IEnumerable items = sqlConnection.Query("Select * from Item");
-                foreach (var item in items)
+                var allSuppliers = conn.Query<Supplier>("SupplierByID", new { SupplierID = 2}, commandType: System.Data.CommandType.StoredProcedure);
+                foreach (var supplier in allSuppliers)
                 {
-                    Console.WriteLine(); ObjectDumper.Write(item);
-                }
-
-                IEnumerable stores = sqlConnection.Query<Store>("Select * from Store where StoreId = @Id", new { Id = 1 });
-                foreach (Store store in stores)
-                {
-                    Console.WriteLine(); ObjectDumper.Write(store);
+                    Console.WriteLine($"SupplierID = {supplier.SupplierID}");
                 }
             }
             Console.WriteLine("Please enter any key to exit");
