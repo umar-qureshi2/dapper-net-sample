@@ -58,6 +58,8 @@
   <ItemGroup>
     <Compile Include="DapperContrib.cs" />
     <Compile Include="DapperWithSP.cs" />
+    <Compile Include="DapperWithTVP.cs" />
+    <Compile Include="Extensions.cs" />
     <Compile Include="HelloDapper.cs" />
     <Compile Include="ObjectDumper.cs" />
     <Compile Include="Program.cs" />
