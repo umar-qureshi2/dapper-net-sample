@@ -18,6 +18,8 @@ namespace HelloDapper
             using (var conn = new SqlConnection("Data Source=LAPTOP-6Q7L361S\\MSSQLDEV;Initial Catalog=Northwind;User ID=sa;Password=Sa@123456"))
             {
                 conn.Open();
+                DynamicParameters @params = new DynamicParameters();
+                @params.Add("pid", 9, direction: System.Data.ParameterDirection.Input);
                 var allSuppliers = conn.Query("ProductsWithSupplier",new {pid = 9 }, commandType: System.Data.CommandType.StoredProcedure);
                 foreach (var supplier in allSuppliers)
                 {
