@@ -39,5 +39,18 @@ namespace HelloDapper
                 }
             }
         }
+
+        public void ProductWithSupplier()
+        {
+            using (var conn = new SqlConnection("Data Source=LAPTOP-6Q7L361S\\MSSQLDEV;Initial Catalog=Northwind;User ID=sa;Password=Sa@123456"))
+            {
+                conn.Open();
+                var allSuppliers = conn.Query("ProductsWithSupplier", new { pid = 9 }, commandType: System.Data.CommandType.StoredProcedure);
+                foreach (var supplier in allSuppliers)
+                {
+                    Console.WriteLine($"{supplier.SupplyInfo}");
+                }
+            }
+        }
     }
 }
