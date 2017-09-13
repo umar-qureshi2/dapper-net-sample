@@ -18,17 +18,7 @@ namespace HelloDapper
             using (var conn = new SqlConnection("Data Source=LAPTOP-6Q7L361S\\MSSQLDEV;Initial Catalog=Northwind;User ID=sa;Password=Sa@123456"))
             {
                 conn.Open();
-                DynamicParameters @params = new DynamicParameters();
-                @params.Add("pid", 9, direction: System.Data.ParameterDirection.Input);
-                @params.Add("supplyInfo", direction: System.Data.ParameterDirection.Output,size:250, dbType: System.Data.DbType.String);
 
-                var allSuppliers = conn.Query("ProductsWithSupplier",@params, commandType: System.Data.CommandType.StoredProcedure);
-                var supplyInfo = @params.Get<string>("supplyInfo");
-                Console.WriteLine(supplyInfo);
-                foreach (var supplier in allSuppliers)
-                {
-                    ObjectDumper.Write(supplier);
-                }
             }
             Console.WriteLine("Please enter any key to exit");
             Console.ReadKey();
