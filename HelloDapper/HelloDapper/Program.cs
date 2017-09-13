@@ -20,7 +20,7 @@ namespace HelloDapper
                 conn.Open();
                 DynamicParameters @params = new DynamicParameters();
                 @params.Add("pid", 9, direction: System.Data.ParameterDirection.Input);
-                @params.Add("supplyInfo", direction: System.Data.ParameterDirection.Output,size:500, dbType: System.Data.DbType.String);
+                @params.Add("supplyInfo", direction: System.Data.ParameterDirection.Output,size:250, dbType: System.Data.DbType.String);
 
                 var allSuppliers = conn.Query("ProductsWithSupplier",@params, commandType: System.Data.CommandType.StoredProcedure);
                 var supplyInfo = @params.Get<string>("supplyInfo");
