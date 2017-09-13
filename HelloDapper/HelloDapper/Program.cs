@@ -18,10 +18,10 @@ namespace HelloDapper
             using (var conn = new SqlConnection("Data Source=LAPTOP-6Q7L361S\\MSSQLDEV;Initial Catalog=Northwind;User ID=sa;Password=Sa@123456"))
             {
                 conn.Open();
-                var allSuppliers = conn.Query<Supplier>("SupplierByID", new { SupplierID = 2}, commandType: System.Data.CommandType.StoredProcedure);
+                var allSuppliers = conn.Query("ProductsWithSupplier", commandType: System.Data.CommandType.StoredProcedure);
                 foreach (var supplier in allSuppliers)
                 {
-                    Console.WriteLine($"SupplierID = {supplier.SupplierID}");
+                    Console.WriteLine($"{supplier.SupplyInfo}");
                 }
             }
             Console.WriteLine("Please enter any key to exit");
