@@ -20,10 +20,14 @@ namespace HelloDapper
                 conn.Open();
                 DynamicParameters @params = new DynamicParameters();
                 @params.Add("pid", 9, direction: System.Data.ParameterDirection.Input);
-                var allSuppliers = conn.Query("ProductsWithSupplier",new {pid = 9 }, commandType: System.Data.CommandType.StoredProcedure);
+                @params.Add("supplyInfo", direction: System.Data.ParameterDirection.Output,size:500, dbType: System.Data.DbType.String);
+
+                var allSuppliers = conn.Query("ProductsWithSupplier",@params, commandType: System.Data.CommandType.StoredProcedure);
+                var supplyInfo = @params.Get<string>("supplyInfo");
+                Console.WriteLine(supplyInfo);
                 foreach (var supplier in allSuppliers)
                 {
-                    Console.WriteLine($"{supplier.SupplyInfo}");
+                    ObjectDumper.Write(supplier);
                 }
             }
             Console.WriteLine("Please enter any key to exit");
