@@ -40,5 +40,20 @@ namespace HelloDapper
                 conn.Execute("ImportBasicSuppliers", new { suppliers = dt.AsTableValuedParameter("SupplierBasic") }, commandType: CommandType.StoredProcedure);
             }
         }
+
+        public void TVPWithMerge()
+        {
+            using (var conn = new SqlConnection("Data Source=LAPTOP-6Q7L361S\\MSSQLDEV;Initial Catalog=Northwind;User ID=sa;Password=Sa@123456"))
+            {
+                conn.Open();
+                DataTable dt = new DataTable();
+                dt.Columns.Add("CompanyName");
+                dt.Columns.Add("City");
+                dt.Rows.Add("New Washing Company", "Marina City");
+                dt.Rows.Add("Walter White & Jessie Inc.", "Albuquerque");
+                conn.Execute("UpdateMergeSuppliers", new { suppliers = dt.AsTableValuedParameter("SupplierBasic") }, commandType: CommandType.StoredProcedure);
+
+            }
+        }
     }
 }

@@ -22,20 +22,9 @@ namespace HelloDapper
                 DataTable dt = new DataTable();
                 dt.Columns.Add("CompanyName");
                 dt.Columns.Add("City");
-                dt.Rows.Add("New Washing Company", "Albuquerque");
-                dt.Rows.Add("Walter White Inc.", "Albuquerque");
-                conn.Execute("ImportBasicSuppliers", new { suppliers = dt.AsTableValuedParameter("SupplierBasic") }, commandType: CommandType.StoredProcedure);
-
-                var builder = new SqlBuilder();
-                var template = builder.AddTemplate("select /**select**/ from Suppliers /**where**/ /**orderby**/");
-                builder.Select("TOP 2 CompanyName, City");
-                builder.OrderBy("SupplierID DESC");
-                var sql = template.RawSql;
-                var suppliers = conn.Query<Supplier>(sql);
-                foreach (var supplier in suppliers)
-                {
-                    ObjectDumper.Write(supplier);
-                }
+                dt.Rows.Add("New Washing Company", "Marina City");
+                dt.Rows.Add("Walter White & Jessie Inc.", "Albuquerque");
+                conn.Execute("UpdateMergeSuppliers", new { suppliers = dt.AsTableValuedParameter("SupplierBasic") }, commandType: CommandType.StoredProcedure);
 
             }
             Console.WriteLine("Please enter any key to exit");
