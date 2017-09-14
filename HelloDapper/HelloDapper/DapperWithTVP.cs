@@ -26,5 +26,19 @@ namespace HelloDapper
             Console.WriteLine("Please enter any key to exit");
             Console.ReadKey();
         }
+
+        public void InsertWithDataTable()
+        {
+            using (var conn = new SqlConnection("Data Source=LAPTOP-6Q7L361S\\MSSQLDEV;Initial Catalog=Northwind;User ID=sa;Password=Sa@123456"))
+            {
+                conn.Open();
+                DataTable dt = new DataTable();
+                dt.Columns.Add("CompanyName");
+                dt.Columns.Add("City");
+                dt.Rows.Add("New Washing Company", "Albuquerque");
+                dt.Rows.Add("Walter White Inc.", "Albuquerque");
+                conn.Execute("ImportBasicSuppliers", new { suppliers = dt.AsTableValuedParameter("SupplierBasic") }, commandType: CommandType.StoredProcedure);
+            }
+        }
     }
 }
