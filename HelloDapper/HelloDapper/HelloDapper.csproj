@@ -57,6 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DapperContrib.cs" />
+    <Compile Include="DapperSqlBuilder.cs" />
     <Compile Include="DapperWithSP.cs" />
     <Compile Include="DapperWithTVP.cs" />
     <Compile Include="Extensions.cs" />
