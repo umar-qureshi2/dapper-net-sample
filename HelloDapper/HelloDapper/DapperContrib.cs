@@ -14,7 +14,7 @@ namespace HelloDapper
     {
         public void ReadByGet()
         {
-            using (var sqlConnection = new SqlConnection("Data Source=LAPTOP-6Q7L361S\\MSSQLDEV;Initial Catalog=Northwind;User ID=sa;Password=Sa@123456"))
+            using (var sqlConnection = new SqlConnection("Data Source=LAPTOP-6Q7L361S\\MSSQLDEV;Initial Catalog=Northwind;User ID=sa;Password=sa123"))
             {
                 sqlConnection.Open();
                 var supplier = sqlConnection.Get<Supplier>(2);
@@ -22,7 +22,7 @@ namespace HelloDapper
         }
         public void GetAll()
         {
-            using (var sqlConnection = new SqlConnection("Data Source=LAPTOP-6Q7L361S\\MSSQLDEV;Initial Catalog=Northwind;User ID=sa;Password=Sa@123456"))
+            using (var sqlConnection = new SqlConnection("Data Source=LAPTOP-6Q7L361S\\MSSQLDEV;Initial Catalog=Northwind;User ID=sa;Password=sa123"))
             {
                 sqlConnection.Open();
                 var supplier = sqlConnection.GetAll<Supplier>();
@@ -31,7 +31,7 @@ namespace HelloDapper
 
         public void Update()
         {
-            using (var sqlConnection = new SqlConnection("Data Source=LAPTOP-6Q7L361S\\MSSQLDEV;Initial Catalog=Northwind;User ID=sa;Password=Sa@123456"))
+            using (var sqlConnection = new SqlConnection("Data Source=LAPTOP-6Q7L361S\\MSSQLDEV;Initial Catalog=Northwind;User ID=sa;Password=sa123"))
             {
                 sqlConnection.Open();
                 var supplier = sqlConnection.Get<Supplier>(2);
@@ -42,7 +42,7 @@ namespace HelloDapper
 
         public void Insert()
         {
-            using (var sqlConnection = new SqlConnection("Data Source=LAPTOP-6Q7L361S\\MSSQLDEV;Initial Catalog=Northwind;User ID=sa;Password=Sa@123456"))
+            using (var sqlConnection = new SqlConnection("Data Source=LAPTOP-6Q7L361S\\MSSQLDEV;Initial Catalog=Northwind;User ID=sa;Password=sa123"))
             {
                 sqlConnection.Open();
                 Supplier MegaSupplier = new Supplier()
@@ -57,7 +57,7 @@ namespace HelloDapper
 
         public void Delete()
         {
-            using (var sqlConnection = new SqlConnection("Data Source=LAPTOP-6Q7L361S\\MSSQLDEV;Initial Catalog=Northwind;User ID=sa;Password=Sa@123456"))
+            using (var sqlConnection = new SqlConnection("Data Source=LAPTOP-6Q7L361S\\MSSQLDEV;Initial Catalog=Northwind;User ID=sa;Password=sa123"))
             {
                 sqlConnection.Open();
                 Supplier MegaSupplier = new Supplier()

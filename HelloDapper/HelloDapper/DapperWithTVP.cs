@@ -13,7 +13,7 @@ namespace HelloDapper
     {
         public void InsertMultipleRowsWODT()
         {
-            using (var conn = new SqlConnection("Data Source=LAPTOP-6Q7L361S\\MSSQLDEV;Initial Catalog=Northwind;User ID=sa;Password=Sa@123456"))
+            using (var conn = new SqlConnection("Data Source=LAPTOP-6Q7L361S\\MSSQLDEV;Initial Catalog=Northwind;User ID=sa;Password=sa123"))
             {
                 conn.Open();
                 var existingtopsuppliers = conn
@@ -29,7 +29,7 @@ namespace HelloDapper
 
         public void InsertWithDataTable()
         {
-            using (var conn = new SqlConnection("Data Source=LAPTOP-6Q7L361S\\MSSQLDEV;Initial Catalog=Northwind;User ID=sa;Password=Sa@123456"))
+            using (var conn = new SqlConnection("Data Source=LAPTOP-6Q7L361S\\MSSQLDEV;Initial Catalog=Northwind;User ID=sa;Password=sa123"))
             {
                 conn.Open();
                 DataTable dt = new DataTable();
@@ -43,7 +43,7 @@ namespace HelloDapper
 
         public void TVPWithMerge()
         {
-            using (var conn = new SqlConnection("Data Source=LAPTOP-6Q7L361S\\MSSQLDEV;Initial Catalog=Northwind;User ID=sa;Password=Sa@123456"))
+            using (var conn = new SqlConnection("Data Source=LAPTOP-6Q7L361S\\MSSQLDEV;Initial Catalog=Northwind;User ID=sa;Password=sa123"))
             {
                 conn.Open();
                 DataTable dt = new DataTable();

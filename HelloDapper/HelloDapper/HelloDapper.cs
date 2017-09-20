@@ -13,7 +13,7 @@ namespace HelloDapper
     {
         static void _tMain(string[] args)
         {
-            using (var sqlConnection = new SqlConnection("Data Source=LAPTOP-6Q7L361S\\MSSQLDEV;Initial Catalog=Northwind;User ID=sa;Password=Sa@123456"))
+            using (var sqlConnection = new SqlConnection("Data Source=LAPTOP-6Q7L361S\\MSSQLDEV;Initial Catalog=Northwind;User ID=sa;Password=sa123"))
             {
                 sqlConnection.Open();
 
@@ -25,7 +25,7 @@ namespace HelloDapper
                     ObjectDumper.Write(product);
                 }
             }
-            using (var sqlConnection = new SqlConnection("Data Source=LAPTOP-6Q7L361S\\MSSQLDEV;Initial Catalog=learn;User ID=sa;Password=Sa@123456"))
+            using (var sqlConnection = new SqlConnection("Data Source=LAPTOP-6Q7L361S\\MSSQLDEV;Initial Catalog=learn;User ID=sa;Password=sa123"))
             {
                 sqlConnection.Open();
                 IEnumerable items = sqlConnection.Query("Select * from Item");
@@ -50,7 +50,7 @@ namespace HelloDapper
     {
         static void _tMain(string[] args)
         {
-            using (var sqlConnection = new SqlConnection("Data Source=LAPTOP-6Q7L361S\\MSSQLDEV;Initial Catalog=Northwind;User ID=sa;Password=Sa@123456"))
+            using (var sqlConnection = new SqlConnection("Data Source=LAPTOP-6Q7L361S\\MSSQLDEV;Initial Catalog=Northwind;User ID=sa;Password=sa123"))
             {
                 sqlConnection.Open();
 
@@ -66,7 +66,7 @@ namespace HelloDapper
             }
 
             //------------------Learn DB---------------------
-            using (var sqlConnection = new SqlConnection("Data Source=LAPTOP-6Q7L361S\\MSSQLDEV;Initial Catalog=learn;User ID=sa;Password=Sa@123456"))
+            using (var sqlConnection = new SqlConnection("Data Source=LAPTOP-6Q7L361S\\MSSQLDEV;Initial Catalog=learn;User ID=sa;Password=sa123"))
             {
                 sqlConnection.Open();
                 IEnumerable items = sqlConnection.Query("Select * from Item");
@@ -92,7 +92,7 @@ namespace HelloDapper
     {
         public void _tmain()
         {
-            using (var sqlConnection = new SqlConnection("Data Source=LAPTOP-6Q7L361S\\MSSQLDEV;Initial Catalog=Northwind;User ID=sa;Password=Sa@123456"))
+            using (var sqlConnection = new SqlConnection("Data Source=LAPTOP-6Q7L361S\\MSSQLDEV;Initial Catalog=Northwind;User ID=sa;Password=sa123"))
             {
                 sqlConnection.Open();
                 Console.WriteLine();
@@ -109,7 +109,7 @@ namespace HelloDapper
     {
         public void _tMain()
         {
-            using (var sqlConnection = new SqlConnection("Data Source=LAPTOP-6Q7L361S\\MSSQLDEV;Initial Catalog=Northwind;User ID=sa;Password=Sa@123456"))
+            using (var sqlConnection = new SqlConnection("Data Source=LAPTOP-6Q7L361S\\MSSQLDEV;Initial Catalog=Northwind;User ID=sa;Password=sa123"))
             {
                 sqlConnection.Open();
                 var multipleQueryResult = sqlConnection
@@ -137,7 +137,7 @@ namespace HelloDapper
     {
         public void _tMain()
         {
-            using (var sqlConnection = new SqlConnection("Data Source=LAPTOP-6Q7L361S\\MSSQLDEV;Initial Catalog=Northwind;User ID=sa;Password=Sa@123456"))
+            using (var sqlConnection = new SqlConnection("Data Source=LAPTOP-6Q7L361S\\MSSQLDEV;Initial Catalog=Northwind;User ID=sa;Password=sa123"))
             {
                 sqlConnection.Open();
                 var productWithSupplier = sqlConnection.Query<Product, Supplier, Product>(
@@ -158,7 +158,7 @@ namespace HelloDapper
 
         public void _uMain()
         {
-            using (var sqlConnection = new SqlConnection("Data Source=LAPTOP-6Q7L361S\\MSSQLDEV;Initial Catalog=Northwind;User ID=sa;Password=Sa@123456"))
+            using (var sqlConnection = new SqlConnection("Data Source=LAPTOP-6Q7L361S\\MSSQLDEV;Initial Catalog=Northwind;User ID=sa;Password=sa123"))
             {
                 sqlConnection.Open();
                 var supplierWithProducts = sqlConnection.Query<Supplier, Product, Supplier>(
@@ -180,7 +180,7 @@ namespace HelloDapper
 
         public void ObjectsUsingMultiQuery()
         {
-            using (var sqlConnection = new SqlConnection("Data Source=LAPTOP-6Q7L361S\\MSSQLDEV;Initial Catalog=Northwind;User ID=sa;Password=Sa@123456"))
+            using (var sqlConnection = new SqlConnection("Data Source=LAPTOP-6Q7L361S\\MSSQLDEV;Initial Catalog=Northwind;User ID=sa;Password=sa123"))
             {
                 sqlConnection.Open();
                 var supplierWithProducts = sqlConnection.QueryMultiple(
@@ -199,7 +199,7 @@ namespace HelloDapper
         //multiple store products retrieval
         public void DictionaryLookup()
         {
-            using (var conn = new SqlConnection("Data Source=LAPTOP-6Q7L361S\\MSSQLDEV;Initial Catalog=Northwind;User ID=sa;Password=Sa@123456"))
+            using (var conn = new SqlConnection("Data Source=LAPTOP-6Q7L361S\\MSSQLDEV;Initial Catalog=Northwind;User ID=sa;Password=sa123"))
             {
                 conn.Open();
                 var suppliersLookup = new Dictionary<int, Supplier>();
@@ -229,7 +229,7 @@ namespace HelloDapper
     {
         public void _tMain()
         {
-            using (var sqlConnection = new SqlConnection("Data Source=LAPTOP-6Q7L361S\\MSSQLDEV;Initial Catalog=Northwind;User ID=sa;Password=Sa@123456"))
+            using (var sqlConnection = new SqlConnection("Data Source=LAPTOP-6Q7L361S\\MSSQLDEV;Initial Catalog=Northwind;User ID=sa;Password=sa123"))
             {
                 var supplier = new Supplier()
                 {
@@ -249,7 +249,7 @@ select cast (scope_identity() as int)
     {
         public void _tMain()
         {
-            using (var sqlConnection = new SqlConnection("Data Source=LAPTOP-6Q7L361S\\MSSQLDEV;Initial Catalog=Northwind;User ID=sa;Password=Sa@123456"))
+            using (var sqlConnection = new SqlConnection("Data Source=LAPTOP-6Q7L361S\\MSSQLDEV;Initial Catalog=Northwind;User ID=sa;Password=sa123"))
             {
                 var supplier = new Supplier()
                 {
@@ -268,7 +268,7 @@ values (@CompanyName, @Address)
     {
         public void _tMain()
         {
-            using (var sqlConnection = new SqlConnection("Data Source=LAPTOP-6Q7L361S\\MSSQLDEV;Initial Catalog=Northwind;User ID=sa;Password=Sa@123456"))
+            using (var sqlConnection = new SqlConnection("Data Source=LAPTOP-6Q7L361S\\MSSQLDEV;Initial Catalog=Northwind;User ID=sa;Password=sa123"))
             {
                 sqlConnection.Execute(@"Update Suppliers SET ContactName = @sname WHERE SupplierID = @sid", new { sname = "Umar", sid = "2" });
             }
@@ -279,7 +279,7 @@ values (@CompanyName, @Address)
     {
         public void _tMain()
         {
-            using (var conn = new SqlConnection("Data Source=LAPTOP-6Q7L361S\\MSSQLDEV;Initial Catalog=Northwind;User ID=sa;Password=Sa@123456"))
+            using (var conn = new SqlConnection("Data Source=LAPTOP-6Q7L361S\\MSSQLDEV;Initial Catalog=Northwind;User ID=sa;Password=sa123"))
             {
                 conn.Open();
                 DynamicParameters parameters = new DynamicParameters();
@@ -297,7 +297,7 @@ values (@CompanyName, @Address)
     {
         public void _tMain()
         {
-            using (var conn = new SqlConnection("Data Source=LAPTOP-6Q7L361S\\MSSQLDEV;Initial Catalog=Northwind;User ID=sa;Password=Sa@123456"))
+            using (var conn = new SqlConnection("Data Source=LAPTOP-6Q7L361S\\MSSQLDEV;Initial Catalog=Northwind;User ID=sa;Password=sa123"))
             {
                 conn.Open();
                 DynamicParameters parameters = new DynamicParameters();

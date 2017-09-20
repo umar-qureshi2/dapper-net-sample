@@ -13,7 +13,7 @@ namespace HelloDapper
     {
         public void SelectById()
         {
-            using (var conn = new SqlConnection("Data Source=LAPTOP-6Q7L361S\\MSSQLDEV;Initial Catalog=Northwind;User ID=sa;Password=Sa@123456"))
+            using (var conn = new SqlConnection("Data Source=LAPTOP-6Q7L361S\\MSSQLDEV;Initial Catalog=Northwind;User ID=sa;Password=sa123"))
             {
                 conn.Open();
                 SqlBuilder builder = new SqlBuilder();
@@ -30,7 +30,7 @@ namespace HelloDapper
 
         public void BuilderAndTVP()
         {
-            using (var conn = new SqlConnection("Data Source=LAPTOP-6Q7L361S\\MSSQLDEV;Initial Catalog=Northwind;User ID=sa;Password=Sa@123456"))
+            using (var conn = new SqlConnection("Data Source=LAPTOP-6Q7L361S\\MSSQLDEV;Initial Catalog=Northwind;User ID=sa;Password=sa123"))
             {
                 conn.Open();
                 DataTable dt = new DataTable();
